@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Playfair+Display:wght@400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==================== DESIGN TOKENS ==================== */
+:root {
+  /* Colors */
+  --primary: #1f2937;
+  --primary-light: #374151;
+  --secondary: #3b82f6;
+  --secondary-light: #60a5fa;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --info: #06b6d4;
+  --bg: #f9fafb;
+  --bg-secondary: #ffffff;
+  --text: #111827;
+  --text-secondary: #6b7280;
+  --border: #e5e7eb;
+  --border-dark: #d1d5db;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}
+
+* {
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+h1 { @apply text-3xl font-bold text-gray-900; }
+h2 { @apply text-2xl font-bold text-gray-900; }
+h3 { @apply text-xl font-semibold text-gray-900; }
+h4 { @apply text-lg font-semibold text-gray-800; }
+
+p { color: var(--text-secondary); }
+
+/* ==================== BUTTONS ==================== */
+select, input, textarea {
+  @apply px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+/* ==================== FORM STYLES ==================== */
+.form-group {
+  @apply mb-6;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700 mb-2;
+}
+
+.form-input {
+  @apply w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
+}
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  @apply px-6 py-2.5 rounded-lg font-medium transition-all duration-200 cursor-pointer inline-flex items-center gap-2;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700 active:scale-95;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700;
+}
+
+.btn-success {
+  @apply bg-green-600 text-white hover:bg-green-700;
+}
+
+.btn-sm {
+  @apply px-3 py-1.5 text-sm;
+}
+
+.btn:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow;
+}
+
+.card-header {
+  @apply flex items-center justify-between mb-4 pb-4 border-b border-gray-200;
+}
+
+/* ==================== MODALS & OVERLAYS ==================== */
+.modal-overlay {
+  @apply fixed inset-0 bg-black/50 z-40 backdrop-blur-sm;
+}
+
+.modal-content {
+  @apply bg-white rounded-xl shadow-lg max-w-md w-full mx-4;
+}
+
+/* ==================== TABLES ==================== */
+.table-container {
+  @apply overflow-x-auto;
+}
+
+table {
+  @apply w-full;
+}
+
+th {
+  @apply px-6 py-3 text-left text-sm font-semibold text-gray-700 bg-gray-50 border-b border-gray-200;
+}
+
+td {
+  @apply px-6 py-4 border-b border-gray-200;
+}
+
+tr:hover {
+  @apply bg-gray-50;
+}
+
+/* ==================== BADGES ==================== */
+.badge {
+  @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium;
+}
+
+.badge-primary {
+  @apply bg-blue-100 text-blue-700;
+}
+
+.badge-success {
+  @apply bg-green-100 text-green-700;
+}
+
+.badge-warning {
+  @apply bg-yellow-100 text-yellow-700;
+}
+
+.badge-danger {
+  @apply bg-red-100 text-red-700;
+}
+
+.badge-info {
+  @apply bg-cyan-100 text-cyan-700;
+}
+
+/* ==================== ALERTS ==================== */
+.alert {
+  @apply px-4 py-3 rounded-lg border mb-4;
+}
+
+.alert-success {
+  @apply bg-green-50 border-green-200 text-green-700;
+}
+
+.alert-danger {
+  @apply bg-red-50 border-red-200 text-red-700;
+}
+
+.alert-warning {
+  @apply bg-yellow-50 border-yellow-200 text-yellow-700;
+}
+
+.alert-info {
+  @apply bg-blue-50 border-blue-200 text-blue-700;
+}
+
+/* ==================== SIDEBAR STYLES ==================== */
+.sidebar {
+  @apply bg-white border-r border-gray-200 sticky top-0 h-screen;
+}
+
+.sidebar-link {
+  @apply flex items-center gap-3 px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-l-4 border-transparent;
+}
+
+.sidebar-link.active {
+  @apply bg-blue-50 text-blue-600 border-l-4 border-blue-600;
+}
+
+/* ==================== NAVBAR STYLES ==================== */
+.navbar {
+  @apply bg-white border-b border-gray-200 sticky top-0 z-30;
+}
+
+.navbar-content {
+  @apply px-6 py-4 flex items-center justify-between;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn var(--transition-base);
+}
+
+.animate-slideUp {
+  animation: slideUp var(--transition-base);
+}
+
+/* ==================== UTILITIES ==================== */
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.active {
+  @apply bg-blue-50 border-blue-500;
+}
