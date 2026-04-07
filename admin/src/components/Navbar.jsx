@@ -16,7 +16,7 @@ const Navbar = ({setToken, sidebarOpen, setSidebarOpen}) => {
               <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 6h16M4 12h16M4 18h16' />
             </svg>
           </button>
-          <img className='w-28 h-8 object-contain' src={assets.logo} alt="Admin Logo" />
+          <img className='w-24 sm:w-28 h-8 object-contain' src={assets.logo} alt="Admin Logo" />
         </div>
 
         {/* Right: Admin Info + Logout */}

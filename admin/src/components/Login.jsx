@@ -85,12 +85,12 @@ const Login = ({setToken}) => {
   return (
     <div className='min-h-screen flex items-center justify-center w-full p-4' style={{background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}}>
         {/* Decorative background elements */}
-        <div className='absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse'></div>
-        <div className='absolute bottom-0 right-0 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse' style={{animationDelay: '2s'}}></div>
+        <div className='absolute top-0 left-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse'></div>
+        <div className='absolute bottom-0 right-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse' style={{animationDelay: '2s'}}></div>
 
         <div className='relative z-10 w-full max-w-md'>
             {/* Card Container with glass-morphism */}
-            <div className='backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-8 md:p-10'>
+            <div className='backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-10'>
                 
                 {/* Header */}
                 <div className='text-center mb-8'>

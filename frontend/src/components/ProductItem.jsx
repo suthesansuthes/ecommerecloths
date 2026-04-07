@@ -18,56 +18,56 @@ const ProductItem = ({id, image, name, price, stock = 0}) => {
 
   return (
     <Link onClick={()=>scrollTo(0,0)} to={`/product/${id}`} className='group block'>
-      <div className='h-full bg-white rounded-xl border-2 border-gray-200 overflow-hidden hover:border-gray-400 hover:shadow-lg transition-all duration-300 flex flex-col'>
+      <div className='h-full bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl active:scale-[0.98] transition-all duration-300 flex flex-col'>
         
         {/* Product Image Container */}
-        <div className='relative overflow-hidden bg-gray-100 aspect-square'>
+        <div className='relative overflow-hidden bg-gray-50 aspect-[3/4]'>
           <img 
-            className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' 
+            className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' 
             src={image[0]} 
             alt={name} 
           />
           
-          {/* Overlay on Hover */}
-          <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300'></div>
+          {/* Gradient overlay */}
+          <div className='absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
           
           {/* Stock Badge */}
-          <div className='absolute top-3 right-3'>
+          <div className='absolute top-2 right-2 sm:top-3 sm:right-3'>
             {totalStock > 0 ? (
-              <div className='bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-bold'>
+              <div className='bg-green-500/90 backdrop-blur-sm text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-sm'>
                 ✓ In Stock
               </div>
             ) : (
-              <div className='bg-red-500 text-white px-3 py-1.5 rounded-full text-xs font-bold'>
-                ✗ Out
+              <div className='bg-red-500/90 backdrop-blur-sm text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold shadow-sm'>
+                ✗ Sold Out
               </div>
             )}
           </div>
         </div>
 
         {/* Product Info Section */}
-        <div className='p-4 flex flex-col flex-1 bg-white'>
+        <div className='p-3 sm:p-4 flex flex-col flex-1 bg-white'>
           
           {/* Product Name */}
-          <h3 className='font-bold text-sm md:text-base text-gray-900 line-clamp-2 mb-2 group-hover:text-black'>
+          <h3 className='font-semibold text-xs sm:text-sm text-gray-900 line-clamp-2 mb-1.5 sm:mb-2 leading-tight group-hover:text-black' style={{fontFamily: 'Outfit, sans-serif', letterSpacing: '0'}}>
             {name}
           </h3>
           
           {/* Rating Stars */}
-          <div className='flex items-center gap-2 mb-3'>
+          <div className='flex items-center gap-1 mb-2 sm:mb-3'>
             <div className='flex gap-0.5'>
               {[...Array(5)].map((_, i) => (
-                <span key={i} className={`text-lg ${i < 4 ? '⭐' : '☆'}`}>
-                  {i < 4 ? '★' : '★'}
+                <span key={i} className='text-xs sm:text-sm'>
+                  {i < 4 ? '⭐' : '☆'}
                 </span>
               ))}
             </div>
-            <span className='text-xs text-gray-500'>(48)</span>
+            <span className='text-[10px] sm:text-xs text-gray-400'>(48)</span>
           </div>
 
           {/* Price - Bottom */}
-          <div className='mt-auto pt-3 border-t-2 border-gray-200'>
-            <p className='text-xl font-bold text-blue-600'>
+          <div className='mt-auto pt-2 sm:pt-3 border-t border-gray-100'>
+            <p className='text-base sm:text-lg font-bold text-gray-900'>
               {currency}{formatPrice(price)}
             </p>
           </div>

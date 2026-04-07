@@ -119,6 +119,25 @@ h6 {
   text-transform: uppercase;
 }
 
+/* Responsive typography for mobile */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2rem;
+    letter-spacing: -0.75px;
+  }
+  h2 {
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+  }
+  h3 {
+    font-size: 1.25rem;
+    letter-spacing: -0.25px;
+  }
+  h4 {
+    font-size: 1.125rem;
+  }
+}
+
 p {
   color: var(--color-text-light);
   font-weight: 400;
@@ -409,5 +428,44 @@ input:focus, textarea:focus, select:focus {
   
   a.active hr {
     display: none;
+  }
+}
+
+/* ==================== MOBILE UX ENHANCEMENTS ==================== */
+
+/* Hide scrollbar for horizontal scroll areas */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Safe area padding for sticky bottom bars (notch devices) */
+.safe-area-bottom {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 640px) {
+  /* Prevent text selection on interactive elements */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Smoother scrolling on iOS */
+  .overflow-y-auto, .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Disable hover transform effects on touch devices */
+  button:hover, a.btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .product-card:hover {
+    transform: none;
   }
 }

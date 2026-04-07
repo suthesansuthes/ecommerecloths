@@ -91,55 +91,60 @@ const Cart = () => {
             {cartData.map((item, index) => {
               const productData = products.find((product) => product._id === item._id);
               return productData ? (
-                <div key={index} className='bg-white border border-gray-200 rounded-lg p-4 flex gap-4 hover:shadow-lg transition-shadow group'>
-                  {/* Product Image */}
-                  <div className='flex-shrink-0'>
-                    <img
-                      src={productData.image[0]}
-                      alt={productData.name}
-                      className='w-24 h-24 object-cover rounded-lg'
-                    />
+                <div key={index} className='bg-white border border-gray-200 rounded-xl p-3 sm:p-4 hover:shadow-lg transition-shadow group'>
+                  {/* Mobile: Horizontal card layout */}
+                  <div className='flex gap-3 sm:gap-4'>
+                    {/* Product Image */}
+                    <div className='flex-shrink-0'>
+                      <img
+                        src={productData.image[0]}
+                        alt={productData.name}
+                        className='w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg'
+                      />
+                    </div>
+
+                    {/* Product Info */}
+                    <div className='flex-1 min-w-0'>
+                      <h3 className='font-semibold text-gray-900 text-sm sm:text-lg truncate'>{productData.name}</h3>
+                      <p className='text-xs sm:text-sm text-gray-500 mt-0.5'>Size: <span className='font-semibold text-gray-700'>{item.size}</span></p>
+                      <p className='text-sm sm:text-lg font-bold text-gray-900 mt-1'>{currency}{formatPrice(productData.price)}</p>
+                    </div>
+
+                    {/* Remove Button - Always visible on mobile */}
+                    <button
+                      onClick={() => setShowDeleteConfirm(index)}
+                      className='self-start p-1.5 text-gray-400 hover:text-red-500 transition-colors flex-shrink-0'
+                    >
+                      <svg className='w-4 h-4 sm:w-5 sm:h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' />
+                      </svg>
+                    </button>
                   </div>
 
-                  {/* Product Info */}
-                  <div className='flex-1'>
-                    <h3 className='font-semibold text-gray-900 text-lg'>{productData.name}</h3>
-                    <p className='text-sm text-gray-600 mt-1'>Size: <span className='font-semibold'>{item.size}</span></p>
-                    <p className='text-lg font-bold text-blue-600 mt-2'>{currency}{formatPrice(productData.price)}</p>
-                  </div>
-
-                  {/* Quantity & Actions */}
-                  <div className='flex flex-col items-end justify-between'>
+                  {/* Quantity & Subtotal Row */}
+                  <div className='flex items-center justify-between mt-3 pt-3 border-t border-gray-100'>
                     {/* Quantity Selector */}
                     <div className='flex items-center border border-gray-300 rounded-lg'>
                       <button
                         onClick={() => updateQuantity(item._id, item.size, item.quantity - 1)}
-                        className='px-3 py-2 text-gray-600 hover:bg-gray-100'
+                        className='px-2.5 sm:px-3 py-1.5 sm:py-2 text-gray-600 hover:bg-gray-100 active:bg-gray-200 text-sm'
                       >
                         −
                       </button>
-                      <span className='px-4 py-2 font-semibold'>{item.quantity}</span>
+                      <span className='px-3 sm:px-4 py-1.5 sm:py-2 font-semibold text-sm'>{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item._id, item.size, item.quantity + 1)}
-                        className='px-3 py-2 text-gray-600 hover:bg-gray-100'
+                        className='px-2.5 sm:px-3 py-1.5 sm:py-2 text-gray-600 hover:bg-gray-100 active:bg-gray-200 text-sm'
                       >
                         +
                       </button>
                     </div>
 
-                    {/* Delete Button */}
-                    <button
-                      onClick={() => setShowDeleteConfirm(index)}
-                      className='text-red-500 hover:text-red-700 text-sm font-semibold mt-2 opacity-0 group-hover:opacity-100 transition-opacity'
-                    >
-                      Remove
-                    </button>
-                  </div>
-
-                  {/* Total for this item */}
-                  <div className='text-right'>
-                    <p className='text-sm text-gray-600'>Subtotal</p>
-                    <p className='text-xl font-bold text-gray-900'>{currency}{formatPrice(productData.price * item.quantity)}</p>
+                    {/* Subtotal */}
+                    <div className='text-right'>
+                      <p className='text-xs text-gray-500'>Subtotal</p>
+                      <p className='text-base sm:text-lg font-bold text-gray-900'>{currency}{formatPrice(productData.price * item.quantity)}</p>
+                    </div>
                   </div>
                 </div>
               ) : null;

@@ -33,11 +33,11 @@ const NewsletterBox = () => {
     }
 
   return (
-    <div className='bg-gradient-to-r from-gray-50 to-white rounded-2xl p-8 md:p-12 my-16 border border-gray-200'>
+    <div className='bg-gradient-to-r from-gray-50 to-white rounded-2xl p-6 sm:p-8 md:p-12 my-10 sm:my-16 border border-gray-200'>
       <div className='text-center'>
-        <div className='flex justify-center mb-4'>
-          <div className='bg-yellow-100 p-3 rounded-full'>
-            <svg className='w-6 h-6 text-yellow-600' fill='currentColor' viewBox='0 0 20 20'>
+        <div className='flex justify-center mb-3 sm:mb-4'>
+          <div className='bg-yellow-100 p-2.5 sm:p-3 rounded-full'>
+            <svg className='w-5 h-5 sm:w-6 sm:h-6 text-yellow-600' fill='currentColor' viewBox='0 0 20 20'>
               <path d='M2.5 3A1.5 1.5 0 001 4.5v.006c0 .213.03.426.088.632l1.988 6.54A1.5 1.5 0 005.75 13h8.5a1.5 1.5 0 001.362-.817l2.477-4.954.088-.177.089-.177v-.007A1.5 1.5 0 0015.5 5h-13zm6 2a.5.5 0 11-1 0 .5.5 0 011 0z' />
             </svg>
           </div>
@@ -47,7 +47,7 @@ const NewsletterBox = () => {
           Exclusive Offers Await
         </h2>
         
-        <p className='text-gray-600 mb-6 max-w-md mx-auto'>
+        <p className='text-gray-600 mb-4 sm:mb-6 max-w-md mx-auto text-sm sm:text-base'>
           Subscribe to our newsletter and get 20% off your first order. Plus, stay updated on new collections and special promotions.
         </p>
 

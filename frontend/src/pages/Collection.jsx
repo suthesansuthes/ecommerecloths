@@ -153,26 +153,36 @@ const Collection = () => {
   }
 
   return (
-    <div className='pt-6 pb-12'>
-      <div className='mb-8'>
+    <div className='pt-4 sm:pt-6 pb-12'>
+      <div className='mb-6 sm:mb-8'>
         <Title text1={'OUR'} text2={'COLLECTION'} />
       </div>
 
-      <div className='flex flex-col lg:flex-row gap-8 lg:gap-12'>
+      <div className='flex flex-col lg:flex-row gap-6 lg:gap-12'>
         
         {/* Filter Sidebar */}
         <div className='lg:w-80 flex-shrink-0'>
           <button
             onClick={()=>setShowFilter(!showFilter)}
-            className='lg:hidden w-full flex items-center justify-center mb-4 p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all font-bold'
+            className='lg:hidden w-full flex items-center justify-between mb-4 px-4 py-3 bg-white border border-gray-300 text-gray-800 rounded-xl hover:shadow-md transition-all font-semibold text-sm'
           >
-            <span>🔍 Filters</span>
-            <svg className={`w-5 h-5 ml-2 transition-transform ${showFilter ? 'rotate-180' : ''}`} fill='currentColor' viewBox='0 0 20 20'>
+            <div className='flex items-center gap-2'>
+              <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z' />
+              </svg>
+              <span>Filters</span>
+              {(category.length > 0 || subCategory.length > 0 || selectedSizes.length > 0) && (
+                <span className='bg-black text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full'>
+                  {category.length + subCategory.length + selectedSizes.length}
+                </span>
+              )}
+            </div>
+            <svg className={`w-5 h-5 transition-transform ${showFilter ? 'rotate-180' : ''}`} fill='currentColor' viewBox='0 0 20 20'>
               <path fillRule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clipRule='evenodd' />
             </svg>
           </button>
 
-          <div className={`bg-white rounded-2xl p-6 border border-gray-200 shadow-sm ${showFilter ? '' : 'hidden lg:block'}`}>
+          <div className={`bg-white rounded-2xl p-4 sm:p-6 border border-gray-200 shadow-sm ${showFilter ? '' : 'hidden lg:block'}`}>
             <AdvancedFilters
               category={category}
               setCategory={setCategory}
@@ -207,20 +217,19 @@ const Collection = () => {
         {/* Products Section */}
         <div className='flex-1'>
           {/* Header with Sort */}
-          <div className='flex items-center justify-between mb-8 pb-6 border-b border-gray-200'>
-            <p className='text-gray-600 text-sm font-medium'>
-              Showing <span className='font-bold text-gray-900'>{filterProducts.length}</span> of <span className='font-bold text-gray-900'>{products.length}</span> products
+          <div className='flex items-center justify-between mb-4 sm:mb-8 pb-3 sm:pb-6 border-b border-gray-200'>
+            <p className='text-gray-600 text-xs sm:text-sm font-medium'>
+              <span className='font-bold text-gray-900'>{filterProducts.length}</span> products
             </p>
             
-            <div className='flex items-center gap-3'>
-              <label className='text-sm text-gray-600 font-medium'>Sort:</label>
+            <div className='flex items-center gap-2 sm:gap-3'>
               <select
                 onChange={(e)=>setSortType(e.target.value)}
-                className='px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors font-semibold'
+                className='px-2 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors font-semibold bg-white'
               >
                 <option value="relavent">Relevant</option>
-                <option value="low-high">Price: Low to High</option>
-                <option value="high-low">Price: High to Low</option>
+                <option value="low-high">Price: Low → High</option>
+                <option value="high-low">Price: High → Low</option>
               </select>
             </div>
           </div>
@@ -240,7 +249,7 @@ const Collection = () => {
 
           {/* Products Grid */}
           {filterProducts.length > 0 ? (
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6'>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6'>
               {filterProducts.map((item, index)=>(
                 <ProductItem key={index} name={item.name} id={item._id} price={item.price} image={item.image} stock={item.stock} />
               ))}

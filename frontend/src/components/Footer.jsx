@@ -6,18 +6,18 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className='mt-20'>
+    <footer className='mt-12 sm:mt-20'>
       {/* Newsletter Section */}
       <NewsletterBox />
 
       {/* Main Footer Content */}
-      <div className='grid grid-cols-1 md:grid-cols-4 gap-8 py-12 border-t border-gray-200'>
+      <div className='grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-8 sm:py-12 border-t border-gray-200'>
         
-        {/* Brand Section */}
-        <div className='space-y-4'>
-          <img src={assets.logo} className='w-32' alt="Forever Logo" />
-          <p className='text-gray-600 text-sm leading-relaxed'>
-            Experience the latest in fashion with our curated collection of premium clothing. Quality, style, and comfort in every piece.
+        {/* Brand Section - Full Width on Mobile */}
+        <div className='col-span-2 md:col-span-1 space-y-4 mb-4 sm:mb-0'>
+          <img src={assets.logo} className='w-28 sm:w-32' alt="Forever Logo" />
+          <p className='text-gray-600 text-xs sm:text-sm leading-relaxed'>
+            Experience the latest in fashion with our curated collection of premium clothing.
           </p>
           <div className='flex gap-4 pt-2'>
             <a href='https://www.facebook.com/profile.php?id=61575451770582' target='_blank' rel='noopener noreferrer' className='text-gray-400 hover:text-blue-600 transition-colors'>
@@ -34,39 +34,39 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className='text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider'>Quick Links</h3>
-          <ul className='space-y-3'>
-            <li><a href='/' className='text-gray-600 hover:text-black transition-colors text-sm'>Home</a></li>
-            <li><a href='/collection' className='text-gray-600 hover:text-black transition-colors text-sm'>Shop</a></li>
-            <li><a href='/about' className='text-gray-600 hover:text-black transition-colors text-sm'>About Us</a></li>
-            <li><a href='/contact' className='text-gray-600 hover:text-black transition-colors text-sm'>Contact</a></li>
+          <h3 className='text-xs sm:text-sm font-bold text-gray-900 mb-3 sm:mb-4 uppercase tracking-wider'>Quick Links</h3>
+          <ul className='space-y-2 sm:space-y-3'>
+            <li><a href='/' className='text-gray-600 hover:text-black transition-colors text-xs sm:text-sm'>Home</a></li>
+            <li><a href='/collection' className='text-gray-600 hover:text-black transition-colors text-xs sm:text-sm'>Shop</a></li>
+            <li><a href='/about' className='text-gray-600 hover:text-black transition-colors text-xs sm:text-sm'>About Us</a></li>
+            <li><a href='/contact' className='text-gray-600 hover:text-black transition-colors text-xs sm:text-sm'>Contact</a></li>
           </ul>
         </div>
 
         {/* Customer Service */}
         <div>
-          <h3 className='text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider'>Customer Service</h3>
-          <ul className='space-y-3'>
-            <li><a href='#' className='text-gray-600 hover:text-black transition-colors text-sm'>Shipping Info</a></li>
-            <li><a href='#' className='text-gray-600 hover:text-black transition-colors text-sm'>Returns</a></li>
-            <li><a href='#' className='text-gray-600 hover:text-black transition-colors text-sm'>FAQ</a></li>
-            <li><a href='#' className='text-gray-600 hover:text-black transition-colors text-sm'>Size Guide</a></li>
+          <h3 className='text-xs sm:text-sm font-bold text-gray-900 mb-3 sm:mb-4 uppercase tracking-wider'>Customer Service</h3>
+          <ul className='space-y-2 sm:space-y-3'>
+            <li><a href='#' className='text-gray-600 hover:text-black transition-colors text-xs sm:text-sm'>Shipping Info</a></li>
+            <li><a href='#' className='text-gray-600 hover:text-black transition-colors text-xs sm:text-sm'>Returns</a></li>
+            <li><a href='#' className='text-gray-600 hover:text-black transition-colors text-xs sm:text-sm'>FAQ</a></li>
+            <li><a href='#' className='text-gray-600 hover:text-black transition-colors text-xs sm:text-sm'>Size Guide</a></li>
           </ul>
         </div>
 
         {/* Contact Info */}
-        <div>
-          <h3 className='text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider'>Get In Touch</h3>
-          <ul className='space-y-3'>
-            <li className='text-gray-600 text-sm'>
+        <div className='col-span-2 md:col-span-1'>
+          <h3 className='text-xs sm:text-sm font-bold text-gray-900 mb-3 sm:mb-4 uppercase tracking-wider'>Get In Touch</h3>
+          <ul className='grid grid-cols-2 md:grid-cols-1 gap-3 sm:space-y-3'>
+            <li className='text-gray-600 text-xs sm:text-sm'>
               <p className='font-medium text-gray-900'>Phone</p>
               <a href='tel:0768236808' className='hover:text-black transition-colors'>0768236808</a>
             </li>
-            <li className='text-gray-600 text-sm'>
+            <li className='text-gray-600 text-xs sm:text-sm'>
               <p className='font-medium text-gray-900'>Email</p>
-              <a href='mailto:vibecode5395@gmail.com' className='hover:text-black transition-colors'>vibecode5395@gmail.com</a>
+              <a href='mailto:vibecode5395@gmail.com' className='hover:text-black transition-colors break-all'>vibecode5395@gmail.com</a>
             </li>
-            <li className='text-gray-600 text-sm'>
+            <li className='text-gray-600 text-xs sm:text-sm col-span-2 md:col-span-1'>
               <p className='font-medium text-gray-900'>Website</p>
               <a href='https://vibecodesoftwares.com' target='_blank' rel='noopener noreferrer' className='hover:text-black transition-colors'>vibecodesoftwares.com</a>
             </li>
@@ -75,13 +75,13 @@ const Footer = () => {
       </div>
 
       {/* Bottom Footer */}
-      <div className='border-t border-gray-200 py-8'>
-        <div className='flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600'>
-          <p>&copy; {currentYear} Forever Fashion. All rights reserved.</p>
-          <div className='flex gap-6'>
-            <a href='#' className='hover:text-black transition-colors'>Privacy Policy</a>
-            <a href='#' className='hover:text-black transition-colors'>Terms of Service</a>
-            <a href='#' className='hover:text-black transition-colors'>Cookie Policy</a>
+      <div className='border-t border-gray-200 py-6 sm:py-8'>
+        <div className='flex flex-col items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600'>
+          <p className='text-center'>&copy; {currentYear} Forever Fashion. All rights reserved.</p>
+          <div className='flex gap-4 sm:gap-6 flex-wrap justify-center'>
+            <a href='#' className='hover:text-black transition-colors'>Privacy</a>
+            <a href='#' className='hover:text-black transition-colors'>Terms</a>
+            <a href='#' className='hover:text-black transition-colors'>Cookies</a>
           </div>
           <div className='flex gap-2'>
             <img src={assets.logo} className='w-8' alt="Visa" />

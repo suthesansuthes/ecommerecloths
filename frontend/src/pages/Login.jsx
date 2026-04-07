@@ -90,7 +90,7 @@ const Login = () => {
                   onChange={(e)=>setName(e.target.value)} 
                   value={name} 
                   type="text" 
-                  placeholder='John Doe'
+                  placeholder='Kamal Perera'
                   required
                   className='w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white text-gray-900'
                 />
@@ -106,7 +106,7 @@ const Login = () => {
                 onChange={(e)=>setEmail(e.target.value)} 
                 value={email} 
                 type="email" 
-                placeholder='you@example.com'
+                placeholder='kamal@gmail.com'
                 required
                 className='w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white text-gray-900'
               />

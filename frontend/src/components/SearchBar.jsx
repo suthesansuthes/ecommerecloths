@@ -19,40 +19,39 @@ const SearchBar = () => {
     },[location])
     
   return showSearch && visible ? (
-    <div className='bg-white border-b border-gray-200 py-6 sticky top-20 z-40'>
-      <div className='max-w-2xl mx-auto px-4'>
-        <div className='relative'>
-          <div className='flex items-center gap-3 bg-gray-50 rounded-full px-5 py-3 border border-gray-300 focus-within:border-black focus-within:ring-2 focus-within:ring-black/10 transition-all duration-300'>
-            <img className='w-5 text-gray-400' src={assets.search_icon} alt="Search" />
+    <div className='bg-white border-b border-gray-100 py-1.5 sm:py-3'>
+      <div className='max-w-2xl mx-auto px-3 sm:px-4'>
+        <div className='flex items-center gap-1.5'>
+          {/* Search Input */}
+          <div className='flex-1 flex items-center gap-1.5 sm:gap-3 bg-gray-50 rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 border border-gray-200 focus-within:border-black focus-within:ring-1 focus-within:ring-black/10 transition-all'>
+            <img className='w-3.5 sm:w-4 flex-shrink-0 opacity-50' src={assets.search_icon} alt="Search" />
             <input
               value={search}
               onChange={(e)=>setSearch(e.target.value)}
-              className='flex-1 outline-none bg-transparent text-gray-900 placeholder-gray-500 text-sm md:text-base'
+              className='flex-1 min-w-0 outline-none bg-transparent text-gray-900 placeholder-gray-400 text-xs sm:text-sm'
               type="text"
-              placeholder='Search for products, brands, styles...'
+              placeholder='Search...'
+              autoFocus
             />
             {search && (
               <button
                 onClick={()=>setSearch('')}
-                className='text-gray-400 hover:text-gray-600 transition-colors'
+                className='text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0'
               >
-                <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20'>
+                <svg className='w-3.5 h-3.5 sm:w-4 sm:h-4' fill='currentColor' viewBox='0 0 20 20'>
                   <path fillRule='evenodd' d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z' clipRule='evenodd' />
                 </svg>
               </button>
             )}
           </div>
-        </div>
 
-        <div className='absolute right-4 top-6'>
+          {/* Close Button */}
           <button
             onClick={()=>setShowSearch(false)}
-            className='text-gray-400 hover:text-gray-600 transition-colors p-2'
+            className='flex-shrink-0 text-gray-500 hover:text-gray-800 transition-colors px-1.5 py-1 text-xs font-medium'
             aria-label='Close search'
           >
-            <svg className='w-6 h-6' fill='currentColor' viewBox='0 0 20 20'>
-              <path fillRule='evenodd' d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z' clipRule='evenodd' />
-            </svg>
+            Cancel
           </button>
         </div>
       </div>

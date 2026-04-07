@@ -14,8 +14,8 @@ const BestSeller = () => {
     },[products])
 
   return (
-    <div className='py-16 md:py-20'>
-      <div className='text-center space-y-6 mb-16'>
+    <div className='py-10 sm:py-16 md:py-20'>
+      <div className='text-center space-y-4 sm:space-y-6 mb-8 sm:mb-16'>
         {/* Preheading */}
         <div className='flex items-center justify-center gap-2'>
           <div className='h-1 w-12 bg-gradient-to-r from-yellow-400 to-transparent rounded'></div>
@@ -36,7 +36,7 @@ const BestSeller = () => {
         </p>
       </div>
 
-      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6'>
         {
             bestSeller.map((item, index)=>(
                 <ProductItem key={index} id={item._id} name={item.name} image={item.image} price={item.price} stock={item.stock} />
@@ -45,7 +45,7 @@ const BestSeller = () => {
       </div>
 
       {/* View All Button */}
-      <div className='text-center mt-12'>
+      <div className='text-center mt-8 sm:mt-12'>
         <button className='btn-secondary px-8 py-3'>
           View All Bestsellers
         </button>

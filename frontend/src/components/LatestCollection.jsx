@@ -12,8 +12,8 @@ const LatestCollection = () => {
     },[products])
 
   return (
-    <div className='my-16 md:my-20'>
-      <div className='text-center space-y-6 mb-16'>
+    <div className='my-10 sm:my-16 md:my-20'>
+      <div className='text-center space-y-4 sm:space-y-6 mb-8 sm:mb-16'>
         {/* Preheading */}
         <div className='flex items-center justify-center gap-2'>
           <div className='h-1 w-12 bg-gradient-to-r from-yellow-400 to-transparent rounded'></div>
@@ -35,7 +35,7 @@ const LatestCollection = () => {
       </div>
 
       {/* Rendering Products */}
-      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 gap-y-4 sm:gap-y-6'>
         {
           latestProducts.map((item,index)=>(
             <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} stock={item.stock} />

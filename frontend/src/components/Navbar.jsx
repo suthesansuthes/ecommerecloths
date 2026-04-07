@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {assets} from '../assets/assets'
 import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
@@ -20,7 +21,7 @@ const Navbar = () => {
       <div className='flex items-center justify-between py-4 px-4 sm:px-6 lg:px-8'>
         
         {/* Logo */}
-        <Link to='/'><img src={assets.logo} className='w-32 hover:opacity-80 transition-opacity' alt="Forever Logo" /></Link>
+        <Link to='/'><img src={assets.logo} className='w-24 sm:w-32 hover:opacity-80 transition-opacity' alt="Forever Logo" /></Link>
 
         {/* Desktop Navigation */}
         <ul className='hidden sm:flex gap-8'>
@@ -53,8 +54,8 @@ const Navbar = () => {
             <img src={assets.search_icon} className='w-5' alt="Search" />
           </button>
           
-          {/* Profile Dropdown */}
-          <div className='group relative'>
+          {/* Profile Dropdown - Desktop only */}
+          <div className='group relative hidden sm:block'>
             <button
               onClick={()=> token ? null : navigate('/login')}
               className='text-gray-700 hover:text-black transition-colors p-2 hover:bg-gray-100 rounded-lg'
@@ -66,7 +67,7 @@ const Navbar = () => {
             {token && 
             <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
               <div className='bg-white border border-gray-200 rounded-xl shadow-lg py-2 px-0 w-44 text-gray-700'>
-                <p className='px-5 py-2.5 cursor-pointer hover:bg-gray-50 hover:text-black transition-colors font-medium'>My Profile</p>
+                <p onClick={()=>navigate('/profile')} className='px-5 py-2.5 cursor-pointer hover:bg-gray-50 hover:text-black transition-colors font-medium'>My Profile</p>
                 <p onClick={()=>navigate('/orders')} className='px-5 py-2.5 cursor-pointer hover:bg-gray-50 hover:text-black transition-colors'>Orders</p>
                 <hr className='my-2 border-gray-200' />
                 <p onClick={logout} className='px-5 py-2.5 cursor-pointer hover:bg-red-50 hover:text-red-600 transition-colors font-medium'>Logout</p>
@@ -96,22 +97,99 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Sidebar */}
-        <div className={`fixed top-0 right-0 bottom-0 z-40 bg-white transition-all duration-300 ${visible ? 'w-full' : 'w-0'}`}>
-          <div className='flex flex-col h-full'>
-            <div onClick={()=>setVisible(false)} className='flex items-center justify-between p-5 border-b border-gray-200 cursor-pointer'>
-              <img className='h-4 rotate-180 opacity-70' src={assets.dropdown_icon} alt="Close" />
-            </div>
-            
-            <div className='flex flex-col overflow-y-auto flex-1'>
-              <NavLink onClick={()=>setVisible(false)} className='py-4 px-6 border-b border-gray-100 hover:bg-gray-50 transition-colors' to='/'>HOME</NavLink>
-              <NavLink onClick={()=>setVisible(false)} className='py-4 px-6 border-b border-gray-100 hover:bg-gray-50 transition-colors' to='/collection'>COLLECTION</NavLink>
-              <NavLink onClick={()=>setVisible(false)} className='py-4 px-6 border-b border-gray-100 hover:bg-gray-50 transition-colors' to='/about'>ABOUT</NavLink>
-              <NavLink onClick={()=>setVisible(false)} className='py-4 px-6 border-b border-gray-100 hover:bg-gray-50 transition-colors' to='/contact'>CONTACT</NavLink>
+      </div>
+
+      {/* Mobile Sidebar - rendered via Portal to escape backdrop-filter containing block */}
+      {createPortal(
+        <>
+          {/* Mobile Sidebar Overlay */}
+          {visible && <div onClick={()=>setVisible(false)} className='fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm sm:hidden' />}
+
+          {/* Mobile Sidebar */}
+          <div className={`fixed top-0 right-0 bottom-0 z-[70] w-4/5 max-w-sm bg-white shadow-2xl transition-transform duration-300 ease-out sm:hidden ${visible ? 'translate-x-0' : 'translate-x-full'}`}>
+            <div className='flex flex-col h-full'>
+              {/* Sidebar Header */}
+              <div className='flex items-center justify-between px-5 py-4 bg-gradient-to-r from-gray-900 to-black'>
+                <img src={assets.logo} className='w-20 brightness-0 invert' alt="Logo" />
+                <button onClick={()=>setVisible(false)} className='p-2 text-white hover:bg-white/10 rounded-full transition-colors' aria-label='Close menu'>
+                  <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                  </svg>
+                </button>
+              </div>
+
+              {/* User Section */}
+              <div className='px-5 py-4 bg-gray-50 border-b border-gray-200'>
+                {token ? (
+                  <div className='flex items-center gap-3'>
+                    <div className='w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm'>
+                      👤
+                    </div>
+                    <div className='flex-1'>
+                      <p className='text-sm font-semibold text-gray-900'>Welcome back!</p>
+                      <p className='text-xs text-gray-500'>Manage your account</p>
+                    </div>
+                  </div>
+                ) : (
+                  <button onClick={()=>{setVisible(false); navigate('/login')}} className='w-full py-2.5 bg-black text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-colors'>
+                    Sign In / Register
+                  </button>
+                )}
+              </div>
+              
+              {/* Navigation Links */}
+              <div className='flex flex-col overflow-y-auto flex-1 py-2'>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/'>
+                  <span className='text-lg'>🏠</span>
+                  <span className='font-medium text-gray-800 text-[15px]'>Home</span>
+                </NavLink>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/collection'>
+                  <span className='text-lg'>👗</span>
+                  <span className='font-medium text-gray-800 text-[15px]'>Collection</span>
+                </NavLink>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/about'>
+                  <span className='text-lg'>ℹ️</span>
+                  <span className='font-medium text-gray-800 text-[15px]'>About Us</span>
+                </NavLink>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/contact'>
+                  <span className='text-lg'>📞</span>
+                  <span className='font-medium text-gray-800 text-[15px]'>Contact</span>
+                </NavLink>
+
+                <div className='my-2 mx-5 border-t border-gray-200'></div>
+
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/cart'>
+                  <span className='text-lg'>🛒</span>
+                  <span className='font-medium text-gray-800 text-[15px]'>Cart</span>
+                  {getCartCount() > 0 && (
+                    <span className='ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full'>{getCartCount()}</span>
+                  )}
+                </NavLink>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/orders'>
+                  <span className='text-lg'>📋</span>
+                  <span className='font-medium text-gray-800 text-[15px]'>My Orders</span>
+                </NavLink>
+                {token && (
+                  <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/profile'>
+                    <span className='text-lg'>👤</span>
+                    <span className='font-medium text-gray-800 text-[15px]'>My Profile</span>
+                  </NavLink>
+                )}
+              </div>
+
+              {/* Sidebar Footer */}
+              {token && (
+                <div className='px-5 py-4 border-t border-gray-200'>
+                  <button onClick={()=>{logout(); setVisible(false)}} className='w-full py-2.5 border-2 border-red-500 text-red-500 text-sm font-semibold rounded-lg hover:bg-red-50 transition-colors'>
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           </div>
-        </div>
-      </div>
+        </>,
+        document.body
+      )}
     </div>
   )
 }

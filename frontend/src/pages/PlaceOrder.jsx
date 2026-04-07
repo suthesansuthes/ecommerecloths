@@ -149,7 +149,7 @@ const PlaceOrder = () => {
                 <div className='flex justify-between mb-8'>
                     {['Address', 'Review', 'Payment'].map((label, idx) => (
                         <div key={idx} className='flex items-center flex-1'>
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
+                            <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${
                                 step > idx
                                     ? 'bg-green-600 text-white'
                                     : step === idx + 1
@@ -158,7 +158,7 @@ const PlaceOrder = () => {
                             }`}>
                                 {step > idx ? '✓' : idx + 1}
                             </div>
-                            <p className={`ml-2 font-semibold ${step >= idx + 1 ? 'text-gray-900' : 'text-gray-500'}`}>
+                            <p className={`ml-1 sm:ml-2 font-semibold text-xs sm:text-base ${step >= idx + 1 ? 'text-gray-900' : 'text-gray-500'}`}>
                                 {label}
                             </p>
                             {idx < 2 && <div className={`flex-1 h-1 mx-2 rounded ${step > idx + 1 ? 'bg-green-600' : 'bg-gray-200'}`}></div>}
@@ -176,7 +176,7 @@ const PlaceOrder = () => {
                             <h2 className='text-2xl font-bold text-gray-900 mb-6'>Delivery Address</h2>
 
                             {/* Full Name */}
-                            <div className='grid grid-cols-2 gap-4 mb-4'>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4'>
                                 <div>
                                     <label className='block text-sm font-semibold text-gray-700 mb-2'>First Name *</label>
                                     <input
@@ -188,7 +188,7 @@ const PlaceOrder = () => {
                                             errors.firstName ? 'border-red-400 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                         type="text"
-                                        placeholder='John'
+                                        placeholder='Kamal'
                                     />
                                     {errors.firstName && <p className='text-red-500 text-xs mt-1'>{errors.firstName}</p>}
                                 </div>
@@ -203,7 +203,7 @@ const PlaceOrder = () => {
                                             errors.lastName ? 'border-red-400 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                         type="text"
-                                        placeholder='Doe'
+                                        placeholder='Perera'
                                     />
                                     {errors.lastName && <p className='text-red-500 text-xs mt-1'>{errors.lastName}</p>}
                                 </div>
@@ -221,7 +221,7 @@ const PlaceOrder = () => {
                                         errors.email ? 'border-red-400 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                     }`}
                                     type="email"
-                                    placeholder='john@example.com'
+                                    placeholder='kamal@gmail.com'
                                 />
                                 {errors.email && <p className='text-red-500 text-xs mt-1'>{errors.email}</p>}
                             </div>
@@ -238,13 +238,13 @@ const PlaceOrder = () => {
                                         errors.street ? 'border-red-400 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                     }`}
                                     type="text"
-                                    placeholder='123 Main Street'
+                                    placeholder='42 Galle Road'
                                 />
                                 {errors.street && <p className='text-red-500 text-xs mt-1'>{errors.street}</p>}
                             </div>
 
                             {/* City & State */}
-                            <div className='grid grid-cols-2 gap-4 mb-4'>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4'>
                                 <div>
                                     <label className='block text-sm font-semibold text-gray-700 mb-2'>City *</label>
                                     <input
@@ -256,7 +256,7 @@ const PlaceOrder = () => {
                                             errors.city ? 'border-red-400 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                         type="text"
-                                        placeholder='Mumbai'
+                                        placeholder='Colombo'
                                     />
                                     {errors.city && <p className='text-red-500 text-xs mt-1'>{errors.city}</p>}
                                 </div>
@@ -268,7 +268,7 @@ const PlaceOrder = () => {
                                         value={formData.state}
                                         className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
                                         type="text"
-                                        placeholder='Maharashtra'
+                                        placeholder='Western'
                                     />
                                 </div>
                             </div>
@@ -286,7 +286,7 @@ const PlaceOrder = () => {
                                             errors.zipcode ? 'border-red-400 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                         type="number"
-                                        placeholder='400001'
+                                        placeholder='10100'
                                     />
                                     {errors.zipcode && <p className='text-red-500 text-xs mt-1'>{errors.zipcode}</p>}
                                 </div>
@@ -301,7 +301,7 @@ const PlaceOrder = () => {
                                             errors.country ? 'border-red-400 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                         type="text"
-                                        placeholder='India'
+                                        placeholder='Sri Lanka'
                                     />
                                     {errors.country && <p className='text-red-500 text-xs mt-1'>{errors.country}</p>}
                                 </div>
@@ -319,7 +319,7 @@ const PlaceOrder = () => {
                                         errors.phone ? 'border-red-400 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                     }`}
                                     type="tel"
-                                    placeholder='+91 98765 43210'
+                                    placeholder='+94 77 123 4567'
                                 />
                                 {errors.phone && <p className='text-red-500 text-xs mt-1'>{errors.phone}</p>}
                             </div>

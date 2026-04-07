@@ -109,7 +109,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder='John Doe'
+                  placeholder='Kamal Perera'
                   className='w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors bg-white'
                 />
               </div>
@@ -123,7 +123,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder='john@example.com'
+                  placeholder='kamal@gmail.com'
                   className='w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors bg-white'
                 />
               </div>
@@ -136,7 +136,7 @@ const Contact = () => {
                   name='phone'
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder='+91 9876543210'
+                  placeholder='+94 771234567'
                   className='w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors bg-white'
                 />
               </div>

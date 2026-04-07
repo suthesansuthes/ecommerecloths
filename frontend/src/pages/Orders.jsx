@@ -95,39 +95,40 @@ const Orders = () => {
             <div
               key={index}
               onClick={() => setSelectedOrder(item)}
-              className='bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer'
+              className='bg-white border border-gray-200 rounded-xl p-4 sm:p-6 hover:shadow-lg active:bg-gray-50 transition-all cursor-pointer'
             >
-              <div className='grid grid-cols-1 md:grid-cols-5 gap-4 items-center'>
+              {/* Mobile: Compact horizontal layout */}
+              <div className='flex gap-3 sm:gap-4 items-start'>
                 {/* Product Image */}
-                <div>
-                  <img src={item.image[0]} alt={item.name} className='w-20 h-20 object-cover rounded-lg' />
-                </div>
+                <img src={item.image[0]} alt={item.name} className='w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg flex-shrink-0' />
 
                 {/* Product Info */}
-                <div className='md:col-span-2'>
-                  <h3 className='font-semibold text-gray-900'>{item.name}</h3>
-                  <p className='text-sm text-gray-600 mt-1'>Size: <span className='font-semibold'>{item.size}</span> | Qty: <span className='font-semibold'>{item.quantity}</span></p>
-                  <p className='text-sm text-gray-600 mt-1'>{currency}{formatPrice(item.price)} each</p>
-                  <p className='text-xs text-gray-500 mt-2'>{new Date(item.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}</p>
-                </div>
-
-                {/* Status Badge */}
-                <div className='text-center'>
-                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${statusColors[item.status]?.bg} ${statusColors[item.status]?.text}`}>
-                    {statusColors[item.status]?.icon} {item.status}
+                <div className='flex-1 min-w-0'>
+                  <h3 className='font-semibold text-gray-900 text-sm sm:text-base truncate'>{item.name}</h3>
+                  <p className='text-xs text-gray-500 mt-0.5'>Size: {item.size} | Qty: {item.quantity}</p>
+                  <p className='text-sm font-bold text-gray-900 mt-1'>{currency}{formatPrice(item.price)}</p>
+                  
+                  {/* Status & Payment - inline on mobile */}
+                  <div className='flex items-center gap-2 mt-2 flex-wrap'>
+                    <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold ${statusColors[item.status]?.bg} ${statusColors[item.status]?.text}`}>
+                      {statusColors[item.status]?.icon} {item.status}
+                    </span>
+                    <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold ${
+                      item.payment ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                    }`}>
+                      {item.payment ? '✓ Paid' : '⏳ Pending'}
+                    </span>
                   </div>
                 </div>
 
-                {/* Payment Status */}
-                <div className='text-right'>
-                  <div className={`px-3 py-1 rounded-full text-xs font-semibold inline-block ${
-                    item.payment ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                  }`}>
-                    {item.payment ? '✓ Paid' : '⏳ Pending'}
-                  </div>
-                  <p className='text-xs text-gray-500 mt-2 block'>Click for details →</p>
-                </div>
+                {/* Arrow indicator */}
+                <svg className='w-4 h-4 text-gray-400 flex-shrink-0 mt-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
+                </svg>
               </div>
+              
+              {/* Date */}
+              <p className='text-[10px] sm:text-xs text-gray-400 mt-2 pl-[76px] sm:pl-[96px]'>{new Date(item.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}</p>
             </div>
           ))}
         </div>

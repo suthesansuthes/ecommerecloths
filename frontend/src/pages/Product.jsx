@@ -63,9 +63,9 @@ const Product = () => {
   }
 
   return productData ? (
-    <div className='pt-6'>
-      {/* Breadcrumb */}
-      <div className='flex items-center gap-2 text-sm text-gray-600 mb-8'>
+    <div className='pt-4 sm:pt-6 pb-20 md:pb-0'>
+      {/* Breadcrumb - hide on mobile */}
+      <div className='hidden sm:flex items-center gap-2 text-sm text-gray-600 mb-8'>
         <span className='hover:text-gray-900 cursor-pointer'>Home</span>
         <span>/</span>
         <span className='hover:text-gray-900 cursor-pointer'>{productData.category}</span>
@@ -73,13 +73,13 @@ const Product = () => {
         <span className='text-gray-900 font-semibold'>{productData.name.slice(0, 30)}</span>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-12'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-12'>
         
         {/* Product Images */}
         <div>
           {/* Main Image */}
-          <div className='relative bg-gray-100 rounded-lg overflow-hidden mb-4 group'>
-            <img src={image} alt={productData.name} className='w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300' />
+          <div className='relative bg-gray-50 rounded-xl sm:rounded-lg overflow-hidden mb-3 sm:mb-4 group'>
+            <img src={image} alt={productData.name} className='w-full h-auto max-h-[50vh] sm:max-h-none object-contain sm:object-cover group-hover:scale-105 transition-transform duration-300' />
             {productData.bestseller && (
               <div className='absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold'>
                 🏆 Bestseller
@@ -95,7 +95,7 @@ const Product = () => {
                 src={item}
                 alt={`thumbnail ${index}`}
                 onClick={() => setImage(item)}
-                className={`w-20 h-20 object-cover rounded-lg cursor-pointer transition-all ${
+                className={`w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg cursor-pointer transition-all ${
                   image === item ? 'border-2 border-blue-600' : 'border-2 border-gray-200 hover:border-gray-400'
                 }`}
               />
@@ -125,7 +125,7 @@ const Product = () => {
 
           {/* Price */}
           <div className='mb-6 pb-6 border-b'>
-            <p className='text-4xl font-bold text-blue-600 mb-2'>{currency}{formatPrice(productData.price)}</p>
+            <p className='text-2xl md:text-4xl font-bold text-blue-600 mb-2'>{currency}{formatPrice(productData.price)}</p>
             {getStockForSize() > 0 ? (
               <p className='text-lg text-green-600 font-semibold'>✓ In Stock ({getStockForSize()} available for size {size || 'select size'})</p>
             ) : (
@@ -137,19 +137,19 @@ const Product = () => {
           <p className='text-gray-600 mb-6 leading-relaxed'>{productData.description}</p>
 
           {/* Size Selection */}
-          <div className='mb-6'>
-            <label className='block text-sm font-semibold text-gray-900 mb-3'>
+          <div className='mb-4 sm:mb-6'>
+            <label className='block text-sm font-semibold text-gray-900 mb-2 sm:mb-3'>
               Select Size *
             </label>
-            <div className='grid grid-cols-4 gap-2'>
+            <div className='flex flex-wrap gap-2'>
               {productData.sizes.map((sizeOption, index) => (
                 <button
                   key={index}
                   onClick={() => setSize(sizeOption)}
-                  className={`py-3 rounded-lg font-semibold border-2 transition-all ${
+                  className={`px-4 py-2.5 sm:py-3 rounded-lg font-semibold border-2 transition-all text-sm min-w-[60px] ${
                     size === sizeOption
                       ? 'border-blue-600 bg-blue-50 text-blue-600'
-                      : 'border-gray-300 text-gray-700 hover:border-blue-400'
+                      : 'border-gray-300 text-gray-700 hover:border-blue-400 active:bg-gray-50'
                   }`}
                 >
                   {sizeOption}
@@ -158,8 +158,8 @@ const Product = () => {
             </div>
           </div>
 
-          {/* Quantity & Add to Cart */}
-          <div className='flex gap-4 mb-6'>
+          {/* Quantity & Add to Cart - Desktop only */}
+          <div className='hidden md:flex gap-4 mb-6'>
             <div className='flex items-center border border-gray-300 rounded-lg'>
               <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className='px-4 py-3 text-gray-600 hover:bg-gray-100'>−</button>
               <span className='px-6 py-3 font-semibold'>{quantity}</span>
@@ -255,9 +255,36 @@ const Product = () => {
       </div>
 
       {/* Related Products */}
-      <div className='mt-16'>
-        <h2 className='text-2xl font-bold mb-8'>Related Products</h2>
+      <div className='mt-10 sm:mt-16'>
+        <h2 className='text-xl sm:text-2xl font-bold mb-6 sm:mb-8'>Related Products</h2>
         <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
+      </div>
+
+      {/* Mobile Sticky Add to Cart Bar */}
+      <div className='fixed bottom-0 left-0 right-0 md:hidden bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.1)] z-50 px-4 py-3 safe-area-bottom'>
+        <div className='flex items-center gap-3'>
+          {/* Price */}
+          <div className='flex-shrink-0'>
+            <p className='text-lg font-bold text-gray-900'>{currency}{formatPrice(productData.price)}</p>
+            {size && <p className='text-[10px] text-gray-500'>Size: {size}</p>}
+          </div>
+          
+          {/* Quantity */}
+          <div className='flex items-center border border-gray-300 rounded-lg flex-shrink-0'>
+            <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className='px-2.5 py-2 text-gray-600 active:bg-gray-100 text-sm'>−</button>
+            <span className='px-2.5 py-2 font-semibold text-sm min-w-[28px] text-center'>{quantity}</span>
+            <button onClick={() => setQuantity(quantity + 1)} className='px-2.5 py-2 text-gray-600 active:bg-gray-100 text-sm'>+</button>
+          </div>
+
+          {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
+            disabled={getStockForSize() <= 0 || !size}
+            className='flex-1 py-2.5 bg-black text-white font-semibold rounded-lg active:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm'
+          >
+            {!size ? 'Select Size' : getStockForSize() <= 0 ? 'Sold Out' : '🛒 Add to Cart'}
+          </button>
+        </div>
       </div>
 
     </div>
