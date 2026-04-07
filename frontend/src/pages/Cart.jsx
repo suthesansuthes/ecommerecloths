@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const Cart = () => {
 
-  const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext);
+  const { products, currency, formatPrice, cartItems, updateQuantity, navigate } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
   const [discountCode, setDiscountCode] = useState('')
