@@ -1,6 +1,8 @@
 import validator from "validator";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
+import crypto from 'crypto'
+import nodemailer from 'nodemailer'
 import userModel from "../models/userModel.js";
 
 
@@ -286,4 +288,111 @@ const updatePreferences = async (req, res) => {
     }
 }
 
-export { loginUser, registerUser, adminLogin, getProfile, updateProfile, changePassword, addAddress, updateAddress, deleteAddress, updatePreferences }
+// Forgot password - send reset email
+const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body
+
+        if (!email) {
+            return res.json({ success: false, message: 'Email is required' })
+        }
+
+        const user = await userModel.findOne({ email })
+        if (!user) {
+            // Don't reveal if email exists
+            return res.json({ success: true, message: 'If an account with that email exists, a reset link has been sent.' })
+        }
+
+        // Generate token
+        const resetToken = crypto.randomBytes(32).toString('hex')
+        const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex')
+
+        user.resetToken = hashedToken
+        user.resetTokenExpiry = Date.now() + 3600000 // 1 hour
+        await user.save()
+
+        // Build reset URL
+        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'
+        const resetUrl = `${frontendUrl}/reset-password/${resetToken}`
+
+        // Send email
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.SMTP_EMAIL,
+                pass: process.env.SMTP_PASSWORD
+            }
+        })
+
+        await transporter.sendMail({
+            from: `"Forever Store" <${process.env.SMTP_EMAIL}>`,
+            to: user.email,
+            subject: 'Password Reset Request',
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
+                        <h1 style="color: white; margin: 0; font-size: 28px;">🔐 Password Reset</h1>
+                    </div>
+                    <div style="background: #f9fafb; padding: 30px; border: 1px solid #e5e7eb; border-radius: 0 0 12px 12px;">
+                        <p style="color: #374151; font-size: 16px;">Hi <strong>${user.name}</strong>,</p>
+                        <p style="color: #6b7280; font-size: 14px;">We received a request to reset your password. Click the button below to set a new password:</p>
+                        <div style="text-align: center; margin: 30px 0;">
+                            <a href="${resetUrl}" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block;">Reset Password</a>
+                        </div>
+                        <p style="color: #6b7280; font-size: 13px;">This link will expire in <strong>1 hour</strong>.</p>
+                        <p style="color: #6b7280; font-size: 13px;">If you didn't request this, please ignore this email. Your password will remain unchanged.</p>
+                        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+                        <p style="color: #9ca3af; font-size: 12px; text-align: center;">Forever Store — Premium Fashion & Lifestyle</p>
+                    </div>
+                </div>
+            `
+        })
+
+        res.json({ success: true, message: 'If an account with that email exists, a reset link has been sent.' })
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: 'Failed to send reset email. Please try again later.' })
+    }
+}
+
+// Reset password with token
+const resetPassword = async (req, res) => {
+    try {
+        const { token, newPassword } = req.body
+
+        if (!token || !newPassword) {
+            return res.json({ success: false, message: 'Token and new password are required' })
+        }
+
+        if (newPassword.length < 8) {
+            return res.json({ success: false, message: 'Password must be at least 8 characters' })
+        }
+
+        const hashedToken = crypto.createHash('sha256').update(token).digest('hex')
+
+        const user = await userModel.findOne({
+            resetToken: hashedToken,
+            resetTokenExpiry: { $gt: Date.now() }
+        })
+
+        if (!user) {
+            return res.json({ success: false, message: 'Invalid or expired reset link. Please request a new one.' })
+        }
+
+        // Hash new password
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(newPassword, salt)
+
+        user.password = hashedPassword
+        user.resetToken = null
+        user.resetTokenExpiry = null
+        await user.save()
+
+        res.json({ success: true, message: 'Password reset successfully! You can now login.' })
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+export { loginUser, registerUser, adminLogin, getProfile, updateProfile, changePassword, addAddress, updateAddress, deleteAddress, updatePreferences, forgotPassword, resetPassword }

@@ -24,7 +24,9 @@ const userSchema = new mongoose.Schema({
         newArrivals: { type: Boolean, default: true },
         exclusiveOffers: { type: Boolean, default: true },
         marketingEmails: { type: Boolean, default: false }
-    }
+    },
+    resetToken: { type: String, default: null },
+    resetTokenExpiry: { type: Date, default: null }
 }, { minimize: false })
 
 const userModel = mongoose.models.user || mongoose.model('user',userSchema);

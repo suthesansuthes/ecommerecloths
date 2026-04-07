@@ -139,9 +139,9 @@ const Login = () => {
             {/* Forgot Password / Toggle Link */}
             <div className='flex justify-between items-center mb-8 text-sm'>
               {currentState === 'Login' && (
-                <a href="#" className='text-blue-600 hover:text-blue-700 font-semibold transition-colors'>
+                <button type='button' onClick={() => navigate('/forgot-password')} className='text-blue-600 hover:text-blue-700 font-semibold transition-colors'>
                   Forgot your password?
-                </a>
+                </button>
               )}
               <button
                 type='button'

@@ -16,6 +16,8 @@ import SearchBar from './components/SearchBar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -42,6 +44,8 @@ const App = () => {
         <Route path='/orders' element={<Orders />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/verify' element={<Verify />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password/:token' element={<ResetPassword />} />
       </Routes>
       <Footer />
     </div>
