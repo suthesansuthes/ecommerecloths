@@ -17,42 +17,42 @@ const Hero = () => {
       {/* Mobile Layout: image background with overlay text */}
       <div className='sm:hidden relative'>
         {/* Background Image */}
-        <div className='relative h-[55vh] max-h-[420px]'>
+        <div className='relative h-[70vh] max-h-[520px]'>
           <img 
             src={assets.hero_img} 
             alt="Latest Fashion Collection"
-            className='w-full h-full object-cover'
+            className='w-full h-full object-cover object-top'
           />
-          <div className='absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20'></div>
+          <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent'></div>
         </div>
         
         {/* Overlay Content */}
-        <div className='absolute inset-0 px-5 flex flex-col items-center justify-center text-center'>
+        <div className='absolute bottom-0 left-0 right-0 px-6 pb-8 flex flex-col items-center text-center'>
           
-          <h1 className='text-white mb-2 leading-[1.1] text-[1.6rem]' style={{fontFamily: "'Playfair Display', serif"}}>
+          <h1 className='text-white mb-3 leading-tight text-[1.75rem]' style={{fontFamily: "'Playfair Display', serif"}}>
             Elevate Your <span className='text-yellow-400'>Style</span>
           </h1>
-          <p className='text-gray-300 text-[13px] leading-relaxed mb-4 max-w-[280px]'>
+          <p className='text-gray-200 text-sm leading-relaxed mb-5 max-w-[300px]'>
             Premium clothing for the modern fashion enthusiast.
           </p>
 
-          <Link to='/collection' className='w-full max-w-[240px] py-2.5 bg-white text-black text-sm font-semibold rounded-full text-center active:scale-95 transition-transform shadow-lg'>
+          <Link to='/collection' className='w-full max-w-[260px] py-3 bg-white text-black text-sm font-semibold rounded-full text-center active:scale-95 transition-transform shadow-lg mb-6'>
             Explore Collection →
           </Link>
 
           {/* Compact Stats */}
-          <div className='flex gap-6 mt-4 pt-3 border-t border-white/15 w-full justify-center'>
-            <div>
-              <p className='text-base font-bold text-yellow-400'>500+</p>
-              <p className='text-gray-400 text-[10px]'>Products</p>
+          <div className='flex gap-8 pt-4 border-t border-white/20 justify-center'>
+            <div className='text-center'>
+              <p className='text-lg font-bold text-yellow-400'>500+</p>
+              <p className='text-gray-400 text-[11px] mt-0.5'>Products</p>
             </div>
-            <div>
-              <p className='text-base font-bold text-yellow-400'>50K+</p>
-              <p className='text-gray-400 text-[10px]'>Customers</p>
+            <div className='text-center'>
+              <p className='text-lg font-bold text-yellow-400'>50K+</p>
+              <p className='text-gray-400 text-[11px] mt-0.5'>Customers</p>
             </div>
-            <div>
-              <p className='text-base font-bold text-yellow-400'>24/7</p>
-              <p className='text-gray-400 text-[10px]'>Support</p>
+            <div className='text-center'>
+              <p className='text-lg font-bold text-yellow-400'>24/7</p>
+              <p className='text-gray-400 text-[11px] mt-0.5'>Support</p>
             </div>
           </div>
         </div>
