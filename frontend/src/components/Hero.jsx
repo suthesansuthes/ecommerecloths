@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
-    <div className='relative overflow-hidden rounded-2xl sm:rounded-3xl mt-3 sm:mt-6 mb-6 sm:mb-16'>
+    <div className='relative overflow-hidden rounded-2xl sm:rounded-3xl mt-1 sm:mt-6 mb-6 sm:mb-16'>
       {/* Background Gradient */}
       <div className='absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-950'></div>
       
@@ -27,10 +27,7 @@ const Hero = () => {
         </div>
         
         {/* Overlay Content */}
-        <div className='absolute bottom-0 left-0 right-0 px-5 pb-6 pt-8 flex flex-col items-center text-center'>
-          <div className='inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20 mb-3'>
-            <span className='text-yellow-400 text-[11px] font-medium'>✨ NEW COLLECTION 2024</span>
-          </div>
+        <div className='absolute inset-0 px-5 flex flex-col items-center justify-center text-center'>
           
           <h1 className='text-white mb-2 leading-[1.1] text-[1.6rem]' style={{fontFamily: "'Playfair Display', serif"}}>
             Elevate Your <span className='text-yellow-400'>Style</span>

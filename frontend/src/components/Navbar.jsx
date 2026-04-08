@@ -139,38 +139,38 @@ const Navbar = () => {
               
               {/* Navigation Links */}
               <div className='flex flex-col overflow-y-auto flex-1 py-2'>
-                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/'>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-blue-50 active:bg-blue-100 transition-colors' to='/'>
                   <span className='text-lg'>🏠</span>
                   <span className='font-medium text-gray-800 text-[15px]'>Home</span>
                 </NavLink>
-                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/collection'>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-blue-50 active:bg-blue-100 transition-colors' to='/collection'>
                   <span className='text-lg'>👗</span>
                   <span className='font-medium text-gray-800 text-[15px]'>Collection</span>
                 </NavLink>
-                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/about'>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-blue-50 active:bg-blue-100 transition-colors' to='/about'>
                   <span className='text-lg'>ℹ️</span>
                   <span className='font-medium text-gray-800 text-[15px]'>About Us</span>
                 </NavLink>
-                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/contact'>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-blue-50 active:bg-blue-100 transition-colors' to='/contact'>
                   <span className='text-lg'>📞</span>
                   <span className='font-medium text-gray-800 text-[15px]'>Contact</span>
                 </NavLink>
 
                 <div className='my-2 mx-5 border-t border-gray-200'></div>
 
-                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/cart'>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-blue-50 active:bg-blue-100 transition-colors' to='/cart'>
                   <span className='text-lg'>🛒</span>
                   <span className='font-medium text-gray-800 text-[15px]'>Cart</span>
                   {getCartCount() > 0 && (
                     <span className='ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full'>{getCartCount()}</span>
                   )}
                 </NavLink>
-                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/orders'>
+                <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-blue-50 active:bg-blue-100 transition-colors' to='/orders'>
                   <span className='text-lg'>📋</span>
                   <span className='font-medium text-gray-800 text-[15px]'>My Orders</span>
                 </NavLink>
                 {token && (
-                  <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-gray-50 active:bg-gray-100 transition-colors' to='/profile'>
+                  <NavLink onClick={()=>setVisible(false)} className='flex items-center gap-4 py-3.5 px-5 hover:bg-blue-50 active:bg-blue-100 transition-colors' to='/profile'>
                     <span className='text-lg'>👤</span>
                     <span className='font-medium text-gray-800 text-[15px]'>My Profile</span>
                   </NavLink>
