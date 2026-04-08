@@ -78,7 +78,7 @@ const Hero = () => {
         <div className='space-y-8 z-10 text-center lg:text-left items-center lg:items-start flex flex-col'>
           {/* Badge */}
           <div className='inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 w-fit hover:bg-white/15 transition-all'>
-            <span className='text-yellow-400 text-sm'>✨ NEW COLLECTION 2024</span>
+            <span className='text-yellow-400 text-sm'>✨ NEW COLLECTION ARRIVED</span>
           </div>
           
           {/* Main Heading */}
