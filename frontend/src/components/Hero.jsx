@@ -27,32 +27,40 @@ const Hero = () => {
         </div>
         
         {/* Overlay Content */}
-        <div className='absolute inset-0 px-5 flex flex-col items-center justify-end pb-6 text-center'>
+        <div className='absolute inset-0 px-5 flex flex-col items-center justify-between py-5 text-center'>
           
-          <h1 className='text-white mb-2 leading-[1.1] text-[1.6rem]' style={{fontFamily: "'Playfair Display', serif"}}>
-            Elevate Your <span className='text-yellow-400'>Style</span>
-          </h1>
-          <p className='text-gray-300 text-[13px] leading-relaxed mb-4 max-w-[280px]'>
-            Premium clothing for the modern fashion enthusiast.
-          </p>
+          {/* Top Badge */}
+          <div className='inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20 self-start'>
+            <span className='text-white text-[11px] font-medium'>🔥 TRENDING NOW</span>
+          </div>
 
-          <Link to='/collection' className='w-full max-w-[240px] py-2.5 bg-white text-black text-sm font-semibold rounded-full text-center active:scale-95 transition-transform shadow-lg'>
-            Explore Collection →
-          </Link>
+          {/* Bottom Content */}
+          <div className='flex flex-col items-center'>
+            <h1 className='text-white mb-2 leading-[1.1] text-[1.6rem]' style={{fontFamily: "'Playfair Display', serif"}}>
+              Elevate Your <span className='text-yellow-400'>Style</span>
+            </h1>
+            <p className='text-gray-300 text-[13px] leading-relaxed mb-4 max-w-[280px]'>
+              Premium clothing for the modern fashion enthusiast.
+            </p>
 
-          {/* Compact Stats */}
-          <div className='flex gap-6 mt-4 pt-3 border-t border-white/15 w-full justify-center'>
-            <div>
-              <p className='text-base font-bold text-yellow-400'>500+</p>
-              <p className='text-gray-400 text-[10px]'>Products</p>
-            </div>
-            <div>
-              <p className='text-base font-bold text-yellow-400'>50K+</p>
-              <p className='text-gray-400 text-[10px]'>Customers</p>
-            </div>
-            <div>
-              <p className='text-base font-bold text-yellow-400'>24/7</p>
-              <p className='text-gray-400 text-[10px]'>Support</p>
+            <Link to='/collection' className='w-full max-w-[240px] py-2.5 bg-white text-black text-sm font-semibold rounded-full text-center active:scale-95 transition-transform shadow-lg'>
+              Explore Collection →
+            </Link>
+
+            {/* Compact Stats */}
+            <div className='flex gap-6 mt-4 pt-3 border-t border-white/15 w-full justify-center'>
+              <div>
+                <p className='text-base font-bold text-yellow-400'>500+</p>
+                <p className='text-gray-400 text-[10px]'>Products</p>
+              </div>
+              <div>
+                <p className='text-base font-bold text-yellow-400'>50K+</p>
+                <p className='text-gray-400 text-[10px]'>Customers</p>
+              </div>
+              <div>
+                <p className='text-base font-bold text-yellow-400'>24/7</p>
+                <p className='text-gray-400 text-[10px]'>Support</p>
+              </div>
             </div>
           </div>
         </div>
