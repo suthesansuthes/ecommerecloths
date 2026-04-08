@@ -34,6 +34,11 @@ const Hero = () => {
             <span className='text-white text-[11px] font-medium'>🔥 TRENDING NOW</span>
           </div>
 
+          {/* Middle Badge */}
+          <div className='inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-1.5 rounded-full border border-white/20'>
+            <span className='text-yellow-400 text-[12px] font-medium'>✨ NEW COLLECTION ARRIVED</span>
+          </div>
+
           {/* Bottom Content */}
           <div className='flex flex-col items-center'>
             <h1 className='text-white mb-2 leading-[1.1] text-[1.6rem]' style={{fontFamily: "'Playfair Display', serif"}}>
