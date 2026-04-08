@@ -36,7 +36,7 @@ const Hero = () => {
 
           {/* Middle Badge */}
           <div className='inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-4 py-1.5 rounded-full border border-white/20'>
-            <span className='text-yellow-400 text-[12px] font-medium'>✨ NEW COLLECTION ARRIVED</span>
+            <span className='text-yellow-400 text-[12px] font-medium'>✨ NEW COLLECTION IS HERE</span>
           </div>
 
           {/* Bottom Content */}
@@ -78,7 +78,7 @@ const Hero = () => {
         <div className='space-y-8 z-10 text-center lg:text-left items-center lg:items-start flex flex-col'>
           {/* Badge */}
           <div className='inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 w-fit hover:bg-white/15 transition-all'>
-            <span className='text-yellow-400 text-sm'>✨ NEW COLLECTION ARRIVED</span>
+            <span className='text-yellow-400 text-sm'>✨ NEW COLLECTION IS HERE</span>
           </div>
           
           {/* Main Heading */}
