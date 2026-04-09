@@ -29,6 +29,26 @@ const Product = () => {
     return 0
   }
 
+  // Check if any size has stock
+  const hasAnyStock = () => {
+    if (!productData || !productData.stock) return false
+    if (typeof productData.stock === 'number') return productData.stock > 0
+    if (typeof productData.stock === 'object') {
+      return Object.values(productData.stock).some(qty => Number(qty) > 0)
+    }
+    return false
+  }
+
+  // Get total stock across all sizes
+  const getTotalStock = () => {
+    if (!productData || !productData.stock) return 0
+    if (typeof productData.stock === 'number') return productData.stock
+    if (typeof productData.stock === 'object') {
+      return Object.values(productData.stock).reduce((sum, qty) => sum + (Number(qty) || 0), 0)
+    }
+    return 0
+  }
+
   const fetchProductData = async () => {
     products.map((item) => {
       if (item._id === productId) {
@@ -126,10 +146,18 @@ const Product = () => {
           {/* Price */}
           <div className='mb-6 pb-6 border-b'>
             <p className='text-2xl md:text-4xl font-bold text-blue-600 mb-2'>{currency}{formatPrice(productData.price)}</p>
-            {getStockForSize() > 0 ? (
-              <p className='text-lg text-green-600 font-semibold'>✓ In Stock ({getStockForSize()} available for size {size || 'select size'})</p>
+            {size ? (
+              getStockForSize() > 0 ? (
+                <p className='text-lg text-green-600 font-semibold'>✓ In Stock ({getStockForSize()} available for size {size})</p>
+              ) : (
+                <p className='text-lg text-red-600 font-semibold'>✗ Out of Stock for size {size}</p>
+              )
             ) : (
-              <p className='text-lg text-red-600 font-semibold'>✗ Out of Stock{size ? ` for size ${size}` : ''}</p>
+              hasAnyStock() ? (
+                <p className='text-lg text-green-600 font-semibold'>✓ In Stock ({getTotalStock()} available) — Select a size</p>
+              ) : (
+                <p className='text-lg text-red-600 font-semibold'>✗ Out of Stock</p>
+              )
             )}
           </div>
 
@@ -142,19 +170,26 @@ const Product = () => {
               Select Size *
             </label>
             <div className='flex flex-wrap gap-2'>
-              {productData.sizes.map((sizeOption, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSize(sizeOption)}
-                  className={`px-4 py-2.5 sm:py-3 rounded-lg font-semibold border-2 transition-all text-sm min-w-[60px] ${
-                    size === sizeOption
-                      ? 'border-blue-600 bg-blue-50 text-blue-600'
-                      : 'border-gray-300 text-gray-700 hover:border-blue-400 active:bg-gray-50'
-                  }`}
-                >
-                  {sizeOption}
-                </button>
-              ))}
+              {productData.sizes.map((sizeOption, index) => {
+                const sizeStock = typeof productData.stock === 'object' ? (Number(productData.stock[sizeOption]) || 0) : (productData.stock || 0)
+                const isOutOfStock = sizeStock <= 0
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setSize(sizeOption)}
+                    className={`px-4 py-2.5 sm:py-3 rounded-lg font-semibold border-2 transition-all text-sm min-w-[60px] relative ${
+                      size === sizeOption
+                        ? 'border-blue-600 bg-blue-50 text-blue-600'
+                        : isOutOfStock
+                        ? 'border-gray-200 text-gray-400 bg-gray-50 line-through'
+                        : 'border-gray-300 text-gray-700 hover:border-blue-400 active:bg-gray-50'
+                    }`}
+                  >
+                    {sizeOption}
+                    {isOutOfStock && <span className='block text-[10px] text-red-400 font-normal no-underline' style={{textDecoration: 'none'}}>Out</span>}
+                  </button>
+                )
+              })}
             </div>
           </div>
 

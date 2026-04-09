@@ -149,18 +149,48 @@ const PlaceOrder = () => {
                 <div className='flex justify-between mb-8'>
                     {['Address', 'Review', 'Payment'].map((label, idx) => (
                         <div key={idx} className='flex items-center flex-1'>
-                            <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${
-                                step > idx
-                                    ? 'bg-green-600 text-white'
-                                    : step === idx + 1
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-gray-200 text-gray-700'
-                            }`}>
+                            <button
+                                type='button'
+                                onClick={() => {
+                                    const targetStep = idx + 1
+                                    if (targetStep < step) {
+                                        setStep(targetStep)
+                                    } else if (targetStep === 2 && step === 1 && validateForm()) {
+                                        setStep(2)
+                                    } else if (targetStep === 3 && step === 2) {
+                                        setStep(3)
+                                    }
+                                }}
+                                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm sm:text-base transition-all ${
+                                    step > idx
+                                        ? 'bg-green-600 text-white cursor-pointer hover:bg-green-700'
+                                        : step === idx + 1
+                                        ? 'bg-blue-600 text-white cursor-default'
+                                        : 'bg-gray-200 text-gray-700 cursor-not-allowed'
+                                }`}
+                            >
                                 {step > idx ? '✓' : idx + 1}
-                            </div>
-                            <p className={`ml-1 sm:ml-2 font-semibold text-xs sm:text-base ${step >= idx + 1 ? 'text-gray-900' : 'text-gray-500'}`}>
+                            </button>
+                            <button
+                                type='button'
+                                onClick={() => {
+                                    const targetStep = idx + 1
+                                    if (targetStep < step) {
+                                        setStep(targetStep)
+                                    } else if (targetStep === 2 && step === 1 && validateForm()) {
+                                        setStep(2)
+                                    } else if (targetStep === 3 && step === 2) {
+                                        setStep(3)
+                                    }
+                                }}
+                                className={`ml-1 sm:ml-2 font-semibold text-xs sm:text-base transition-colors ${
+                                    step > idx + 1 ? 'text-gray-900 cursor-pointer hover:text-blue-600' 
+                                    : step === idx + 1 ? 'text-gray-900 cursor-default' 
+                                    : 'text-gray-500 cursor-not-allowed'
+                                }`}
+                            >
                                 {label}
-                            </p>
+                            </button>
                             {idx < 2 && <div className={`flex-1 h-1 mx-2 rounded ${step > idx + 1 ? 'bg-green-600' : 'bg-gray-200'}`}></div>}
                         </div>
                     ))}
@@ -168,7 +198,31 @@ const PlaceOrder = () => {
             </div>
 
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto'>
-                
+
+                {/* Right Side - Order Summary (shows first on mobile) */}
+                <div className='lg:col-span-1 order-first lg:order-last'>
+                    <div className='sticky top-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 border border-gray-200'>
+                        <h3 className='text-lg font-bold text-gray-900 mb-4'>Order Summary</h3>
+                        <CartTotal />
+                        
+                        {/* Security Badges */}
+                        <div className='mt-6 pt-6 border-t border-gray-300 space-y-2 text-sm text-gray-700'>
+                            <p className='flex items-center gap-2'>
+                                <svg className='w-5 h-5 text-green-600' fill='currentColor' viewBox='0 0 24 24'>
+                                    <path d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z' />
+                                </svg>
+                                Secure Checkout
+                            </p>
+                            <p className='flex items-center gap-2'>
+                                <svg className='w-5 h-5 text-green-600' fill='currentColor' viewBox='0 0 24 24'>
+                                    <path d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z' />
+                                </svg>
+                                SSL Encrypted
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Left Side - Address Form */}
                 {step === 1 && (
                     <div className='lg:col-span-2'>
@@ -368,13 +422,22 @@ const PlaceOrder = () => {
                                 </div>
                             </div>
 
-                            <button
-                                type='button'
-                                onClick={() => setStep(3)}
-                                className='w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors'
-                            >
-                                Continue to Payment
-                            </button>
+                            <div className='flex gap-3'>
+                                <button
+                                    type='button'
+                                    onClick={() => setStep(1)}
+                                    className='flex-1 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors'
+                                >
+                                    ← Back to Address
+                                </button>
+                                <button
+                                    type='button'
+                                    onClick={() => setStep(3)}
+                                    className='flex-1 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors'
+                                >
+                                    Continue to Payment
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -442,29 +505,6 @@ const PlaceOrder = () => {
                     </div>
                 )}
 
-                {/* Right Side - Order Summary */}
-                <div className='lg:col-span-1'>
-                    <div className='sticky top-4 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 border border-gray-200'>
-                        <h3 className='text-lg font-bold text-gray-900 mb-4'>Order Summary</h3>
-                        <CartTotal />
-                        
-                        {/* Security Badges */}
-                        <div className='mt-6 pt-6 border-t border-gray-300 space-y-2 text-sm text-gray-700'>
-                            <p className='flex items-center gap-2'>
-                                <svg className='w-5 h-5 text-green-600' fill='currentColor' viewBox='0 0 24 24'>
-                                    <path d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z' />
-                                </svg>
-                                Secure Checkout
-                            </p>
-                            <p className='flex items-center gap-2'>
-                                <svg className='w-5 h-5 text-green-600' fill='currentColor' viewBox='0 0 24 24'>
-                                    <path d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z' />
-                                </svg>
-                                SSL Encrypted
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </form>
     )
