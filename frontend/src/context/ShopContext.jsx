@@ -142,6 +142,26 @@ const ShopContextProvider = (props) => {
         }
     }
 
+    const syncLocalCartToBackend = async (token) => {
+        // If there are local cart items, sync them to the backend before fetching
+        const localCart = structuredClone(cartItems)
+        const hasLocalItems = Object.keys(localCart).length > 0
+
+        if (hasLocalItems) {
+            for (const itemId in localCart) {
+                for (const size in localCart[itemId]) {
+                    if (localCart[itemId][size] > 0) {
+                        try {
+                            await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } })
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     useEffect(() => {
         getProductsData()
     }, [])
@@ -152,7 +172,9 @@ const ShopContextProvider = (props) => {
             getUserCart(localStorage.getItem('token'))
         }
         if (token) {
-            getUserCart(token)
+            syncLocalCartToBackend(token).then(() => {
+                getUserCart(token)
+            })
         }
     }, [token])
 
